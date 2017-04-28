@@ -292,13 +292,7 @@ stock getyearweek(const tm[Time])
 
 stock getmonthweek(const tm[Time])
 {
-	new _tm[Time];
-	_tm = tm;
-	_tm[TIME_MDAY] = 1;
-
-	new time_t:t = mktime(_tm);
-
-	return ((tm[TIME_MDAY] + _tm[TIME_WDAY] - 2) / 7) + 1;
+	return 1 + ((tm[TIME_MDAY] + tm[TIME_WDAY] - 1) / 7);
 }
 
 stock getmonthend(year, month)

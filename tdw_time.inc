@@ -2,7 +2,7 @@
 	Time
 
 | Description:
-	This library adds the useful functions from C/Ñ++ languages, because
+	This library adds the useful functions from C/C++ languages, because
 	PAWN has very few functions to manipulate with time. The functions
 	that are added from C/C++ languages are provide a huge functionality.
 

@@ -137,11 +137,18 @@ stock time_t:time()
 stock gmtime(const time_t:time, tm[Time])
 {
 	new
-		dayclock = _:time % TDW_SECONDS_IN_DAY,
-		dayno    = _:time / TDW_SECONDS_IN_DAY,
-		year     = TDW_EPOCH_YEAR,
+		dayclock, dayno,
+		year = TDW_EPOCH_YEAR,
 		ysize, isleap,
 		monthdays, month_index;
+
+	// dayclock = _:time % TDW_SECONDS_IN_DAY;
+	// dayno = _:time / TDW_SECONDS_IN_DAY;
+	#emit load.s.pri time
+	#emit const.alt  TDW_SECONDS_IN_DAY
+	#emit sdiv
+	#emit stor.s.alt dayclock
+	#emit stor.s.pri dayno
 
 	tm[TIME_SEC] = dayclock % TDW_SECONDS_IN_MINUTE;
 	tm[TIME_MIN] = (dayclock % TDW_SECONDS_IN_HOUR) / TDW_MINUTES_IN_HOUR;
@@ -239,9 +246,12 @@ stock time_t:mktime(tm[Time])
 	if (cellmax - day < (tmp_year - TDW_EPOCH_YEAR) / 4 + 1)
 		overflow++;
 
-	day += (tmp_year - TDW_EPOCH_YEAR) / 4 + _:((tmp_year % 4) && tmp_year % 4 < TDW_EPOCH_YEAR % 4);
-	day -= (tmp_year - TDW_EPOCH_YEAR) / 100 + _:((tmp_year % 100) && tmp_year % 100 < TDW_EPOCH_YEAR % 100);
-	day += (tmp_year - TDW_EPOCH_YEAR) / 400 + _:((tmp_year % 400) && tmp_year % 400 < TDW_EPOCH_YEAR % 400);
+	day += (tmp_year - TDW_EPOCH_YEAR) / 4   + _:((tmp_year % 4)
+		&& tmp_year % 4 < TDW_EPOCH_YEAR % 4);
+	day -= (tmp_year - TDW_EPOCH_YEAR) / 100 + _:((tmp_year % 100)
+		&& tmp_year % 100 < TDW_EPOCH_YEAR % 100);
+	day += (tmp_year - TDW_EPOCH_YEAR) / 400 + _:((tmp_year % 400)
+		&& tmp_year % 400 < TDW_EPOCH_YEAR % 400);
 
 	yday = month = 0;
 

@@ -20,7 +20,7 @@ main()
 	printf("Hours:        %3d | 59", tm[TIME_HOUR] );
 	printf("Day  (month): %3d | 31", tm[TIME_MDAY] );
 	printf("Day  (year):  %3d | **", tm[TIME_YDAY] );
-	printf("Day  (week):  %3d | 3 ", tm[TIME_WDAY] );
+	printf("Day  (week):  %3d | 6 ", tm[TIME_WDAY] );
 	// printf("Week (year):  %3d | 53", tm[TIME_YWEEK]);
 	// printf("Week (month): %3d | 3 ", tm[TIME_MWEEK]);
 	printf("Month:        %3d | 11", tm[TIME_MON]  );

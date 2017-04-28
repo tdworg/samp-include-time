@@ -57,6 +57,9 @@
 	#define _YEAR_SIZE(%0) (_IS_LEAP_YEAR(%0)?366:365)
 #endif
 
+#define FIRSTSUNDAY(%0)       ((%0[TIME_YDAY] - %0[TIME_WDAY] + 420) % 7)
+#define FIRSTDAYOF(%0)        ((%0[TIME_WDAY] - %0[TIME_YDAY] + 420) % 7)
+
 enum Time
 {
 	TIME_SEC,   // seconds       [0,60]
@@ -280,4 +283,25 @@ stock time_t:mktime(tm[Time])
 	}
 
 	return time_t:seconds;
+}
+
+stock getyearweek(const tm[Time])
+{
+	return ((tm[TIME_YDAY] - (tm[TIME_WDAY] ? (tm[TIME_WDAY] - 1) : 6)) / TDW_DAYS_IN_WEEK) + 1;
+}
+
+stock getmonthweek(const tm[Time])
+{
+	new _tm[Time];
+	_tm = tm;
+	_tm[TIME_MDAY] = 1;
+
+	new time_t:t = mktime(_tm);
+
+	return ((tm[TIME_MDAY] + _tm[TIME_WDAY] - 2) / 7) + 1;
+}
+
+stock getmonthend(year, month)
+{
+	return (0 <= month <= 11) ? TDW_g_sDaysInMonths[_IS_LEAP_YEAR(year)][month] : -1;
 }

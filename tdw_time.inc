@@ -131,6 +131,7 @@ static stock const
 	{31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31}  // leap year
 };
 
+// A wrapper for gettime
 stock time_t:time()
 {
 	return time_t:gettime();
@@ -284,6 +285,8 @@ stock time_t:mktime(tm[Time])
 
 	return time_t:seconds;
 }
+
+// Extra functions
 
 stock getyearweek(const tm[Time])
 {

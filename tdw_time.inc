@@ -6,14 +6,20 @@
 	PAWN has very few functions to manipulate with time. The functions
 	that are added from C/C++ languages are provide a huge functionality.
 
-| Functions:
+	Functions:
 	- gmtime
 		Converts time_t to Time structure.
 	- mktime
 		Converts Time structure to time_t.
 
 | Version:
-	0.1.0
+	1.0.0
+
+| Dependencies:
+	-
+
+| Compatible with the JIT plugin:
+	Yes
 
 | License:
 	Copyright (c) 2017 Double V
